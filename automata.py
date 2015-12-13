@@ -13,6 +13,7 @@ vals = [ON, OFF]
 
 grid = np.random.choice(vals, N*N, p=[0.2, 0.8]).reshape(N, N)
 
+
 def update(data):
   global grid
   newGrid = grid.copy()
@@ -34,6 +35,7 @@ def update(data):
 fig, ax = plt.subplots()
 mat = ax.matshow(grid,cmap=plt.get_cmap('hot'), interpolation='nearest',
                vmin=0, vmax=1)
-ani = animation.FuncAnimation(fig, update, interval=50,
-                              save_count=50)
+ani = animation.FuncAnimation(fig, update, interval=1,)
 plt.show()
+
+
