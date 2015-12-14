@@ -36,7 +36,7 @@ def graficarPoblacion():
 	 
 def iniciar():
 	poblacion.configure(state='normal')
-	pass
+	mapa = subprocess.Popen([sys.executable, 'mapa.py'])
 
 
 root = Tk()
