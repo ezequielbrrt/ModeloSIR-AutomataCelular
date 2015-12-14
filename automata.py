@@ -32,6 +32,7 @@ def update(data):
   mat.set_data(newGrid)
   grid = newGrid
   return [mat]
+  
 fig, ax = plt.subplots()
 mat = ax.matshow(grid,cmap=plt.get_cmap('hot'), interpolation='nearest',
                vmin=0, vmax=1)
