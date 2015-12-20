@@ -10,25 +10,7 @@ from Tkinter import *
 import tkMessageBox
 import subprocess
 
-
-def simularAutomata():
-	if var.get() == 1 or var.get() == 2:
-		poblacion.configure(state='normal')
-		atractor.configure(state='normal')
-		reinicio.configure(state='normal')
-		simulacion.configure(state='disabled')
-		datoPoblacion = variable.get()
-		datoDensidad = open("DatoDensidad.txt","w")
-		datoDensidad.write(str(datoPoblacion)+","
-			+str(var.get())+","
-			+str(variableTiempo.get())+","
-			+(variableSimulacion.get())+","
-			+v.get()+","
-			+str(varAtractor.get()))
-		datoDensidad.close()
-		programaAutomata = subprocess.Popen([sys.executable, 'automata.py'])
-	else:
-		tkMessageBox.showerror("Error", "Selecciona una opción \n de automata")
+#tkMessageBox.showerror("Error", "Selecciona una opción \n de automata")
 		
 def graficarPoblacion():
 	poblacion.configure(state='disabled')
@@ -36,8 +18,17 @@ def graficarPoblacion():
 	 
 def iniciar():
 	poblacion.configure(state='normal')
-	mapa = subprocess.Popen([sys.executable, 'mapa.py'])
-
+	datosResistencia = resistencia.get()
+	datosVelocidad = velocidad.get()
+	datosPersonas = personas.get()
+	#mapa = subprocess.Popen([sys.executable, 'mapa.py'])
+	print datosResistencia
+	print datosVelocidad
+	print datosPersonas
+	datos = open("Datos.txt","w")
+	datos.write(str(datosResistencia)+","
+		+str(datosVelocidad)+","+str(datosPersonas))
+	datos.close()
 
 root = Tk()
 variable = StringVar(root)
@@ -62,6 +53,7 @@ velocidad = Scale(root, from_=1, to=10, orient=HORIZONTAL)
 velocidad.grid(row=2,column=2)
 personas = Scale(root, from_=1, to=10, orient=HORIZONTAL)
 personas.grid(row=2,column=1)
+
 
 #Botones para simular y graficar
 iniciar = Button(root, text="Iniciar Simulación",command=iniciar, relief=GROOVE)

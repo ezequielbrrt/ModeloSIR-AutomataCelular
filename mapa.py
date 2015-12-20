@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Archivo mapa.py que sirve para dibujar el mapa 
 de méxico 
 """
-
+"""
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -12,9 +12,9 @@ from pylab import *
 import numpy as np
 
 def update(data):
+"""
 
-
-    """
+"""
     COMO GRAFICAR PUNTOS
 
     # Houston, Texas
@@ -30,10 +30,11 @@ def update(data):
     m.plot(xpt,ypt, 'go')
     """
     #canbia el tamaño de la ventana
-    fig = matplotlib.pyplot.gcf()
-    fig.set_size_inches(18.5, 10.5, forward = True)
+    
+"""
+fig = matplotlib.pyplot.gcf()
+fig.set_size_inches(18.5, 10.5, forward = True)
  
-
 m = Basemap(projection='mill',llcrnrlat=14.5,urcrnrlat=33,\
                 llcrnrlon=-120,urcrnrlon=-85,resolution='c')
 m.drawcoastlines()
@@ -44,4 +45,40 @@ m.drawmapboundary(fill_color='aqua')
 
 ani = animation.FuncAnimation(m,update,interval=1)
 plt.title("PROPAGACION DEL DENGUE EN MEXICO")
+plt.show()
+"""
+
+
+
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+import numpy as np
+import matplotlib.animation as animation
+map = Basemap(projection='robin', resolution = 'l', area_thresh = 1000.0,
+          lat_0=0, lon_0=-130)
+map.drawcoastlines()
+map.drawcountries()
+map.fillcontinents(color = 'gray')
+map.drawmapboundary()
+map.drawmeridians(np.arange(0, 360, 30))
+map.drawparallels(np.arange(-90, 90, 30))
+
+x,y = map(0, 0)
+point = map.plot(x, y, 'ro', markersize=5)[0]
+
+def init():
+    point.set_data([], [])
+    return point,
+
+# animation function.  This is called sequentially
+def animate(i):
+    lons, lats =  np.random.random_integers(-130, 130, 2)
+    x, y = map(lons, lats)
+    point.set_data(x, y)
+    return point,
+
+# call the animator.  blit=True means only re-draw the parts that have changed.
+anim = animation.FuncAnimation(plt.gcf(), animate, init_func=init,
+                               frames=20, interval=500, blit=True)
+
 plt.show()
