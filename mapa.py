@@ -63,22 +63,17 @@ map.drawmapboundary()
 map.drawmeridians(np.arange(0, 360, 30))
 map.drawparallels(np.arange(-90, 90, 30))
 
-x,y = map(0, 0)
-point = map.plot(x, y, 'ro', markersize=5)[0]
-
-def init():
-    point.set_data([], [])
-    return point,
 
 # animation function.  This is called sequentially
 def animate(i):
     lons, lats =  np.random.random_integers(-130, 130, 2)
-    x, y = map(lons, lats)
-    point.set_data(x, y)
+    x,y = map(lons,lats)
+    point = map.plot(x,y, 'ro')
     return point,
 
+
+#fig = plt.subplot()
 # call the animator.  blit=True means only re-draw the parts that have changed.
-anim = animation.FuncAnimation(plt.gcf(), animate, init_func=init,
-                               frames=20, interval=500, blit=False)
+anim = animation.FuncAnimation(plt.gcf(), animate, interval=500)
 
 plt.show()
