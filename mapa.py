@@ -49,24 +49,30 @@ plt.show()
 """
 
 
-
 from mpl_toolkits.basemap import Basemap
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.animation as animation
-map = Basemap(projection='robin', resolution = 'l', area_thresh = 1000.0,
-          lat_0=0, lon_0=-130)
+from pylab import *
+import numpy as np
+
+#configuación del los valores del mapa
+map = Basemap(projection='mill',llcrnrlat=14.5,urcrnrlat=33,\
+                llcrnrlon=-120,urcrnrlon=-85,resolution='c')
 map.drawcoastlines()
 map.drawcountries()
-map.fillcontinents(color = 'gray')
-map.drawmapboundary()
-map.drawmeridians(np.arange(0, 360, 30))
-map.drawparallels(np.arange(-90, 90, 30))
+map.fillcontinents(color='#7F5454',lake_color= "#6F9CF5")
+map.drawmapboundary(fill_color= "#6F9CF5")
+map.drawstates()
 
+#se asigna un nuevo tamaño a la ventana del mapa
+fig = matplotlib.pyplot.gcf()
+fig.set_size_inches(18.5, 10.5, forward = True)
 
 # animation function.  This is called sequentially
 def animate(i):
-    lons, lats =  np.random.random_integers(-130, 130, 2)
+    lons  =  np.random.random_integers(-120, -85, 2)
+    lats = np.random.random_integers(14.5, 33, 2)
     x,y = map(lons,lats)
     point = map.plot(x,y, 'ro')
     return point,
@@ -75,5 +81,5 @@ def animate(i):
 #fig = plt.subplot()
 # call the animator.  blit=True means only re-draw the parts that have changed.
 anim = animation.FuncAnimation(plt.gcf(), animate, interval=500)
-
+plt.title("SIMULACION DE LA PROPAGACION DEL DENGUE")
 plt.show()
