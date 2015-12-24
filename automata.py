@@ -53,13 +53,14 @@ datos.close()
 for x in range(1,10000):
 	longitud = np.random.uniform(-97,-85,1)
 	latitud = np.random.uniform(14.5,21,1)
+
 	if latitud[0] < 16 and longitud[0] < -93:
 	    pass
 	if latitud[0] < 20 and longitud[0] < -87:
 		pass
 	else:
 		datos = open("Poblacion.txt","a")	
-		datos.write(str(latitud)+","
-			+str(longitud)+"\n")
+		datos.write(str(latitud[0])+","
+			+str(longitud[0])+"\n")
 		datos.close()
 	

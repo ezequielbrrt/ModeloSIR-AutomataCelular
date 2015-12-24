@@ -26,33 +26,43 @@ map.drawstates()
 fig = matplotlib.pyplot.gcf()
 fig.set_size_inches(18.5, 10.5, forward = True)
 
-# animation function.  This is called sequentially
+#recoleccion de datos 
+pullData = open("Poblacion.txt","r").read()
+dataArray = pullData.split('\n')
+lat = []
+lon = []
+# funcion de animacion
 def animate(i):
-    lons  =  np.random.random_integers(-120, -85, 2)
-    lats = np.random.random_integers(14.5, 33, 2)
-    x,y = map(lons,lats)
-    point = map.plot(x,y, 'ro')
+    """
+    lons  =  np.random.uniform(-97, -85, 1)
+    lats = np.random.uniform(14.5, 21, 1)
+    if lats[0] < 23 and lons[0] < -106:
+        return
+    if lats[0] < 16 and lons[0] < -93:
+        return
+    if lats[0] > 23 and lons[0] < -110:
+        return
+    if lats[0] < 29 and lats[0] > 21: 
+        if lons[0] > -97:
+            return
+    """
+    for eachLine in dataArray:
+        if len(eachLine)>1:
+            x ,y = eachLine.split(',')
+            lat.append(float(x))
+            lon.append(float(y))
+        xar, yar = map(lon,lat)
+        point = map.plot(xar,yar, 'ro')
+    
+    #obtener una mejor distribucion
+    #s = np.random.uniform(1,0,2)
+    #print s
+    
     return point,
 
 
 #fig = plt.subplot()
 # call the animator.  blit=True means only re-draw the parts that have changed.
-anim = animation.FuncAnimation(plt.gcf(), animate, interval=500)
+anim = animation.FuncAnimation(plt.gcf(), animate, interval=1)
 plt.title("SIMULACION DE LA PROPAGACION DEL DENGUE")
 plt.show()
-
-"""
-    COMO GRAFICAR PUNTOS
-
-    # Houston, Texas
-
-    lat,lon = 29.7630556,-95.3630556
-    x,y = m(lon,lat)
-    m.plot(x,y, 'ro')
-    
-
-    lon, lat = -104.237, 40.125 # Location of Boulder
-
-    xpt,ypt = m(lon,lat)
-    m.plot(xpt,ypt, 'go')
-    """

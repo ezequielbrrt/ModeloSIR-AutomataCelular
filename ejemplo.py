@@ -22,8 +22,9 @@ def init():
 # animation function.  This is called sequentially
 def animate(i):
     lons, lats =  np.random.random_integers(-130, 130, 2)
-    x, y = map(lons, lats)
-    point.set_data(x, y)
+    if int(lons) > 23 and int(lats) > -106:
+    	x, y = map(lons, lats)
+    	point.set_data(x, y)
     return point,
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
