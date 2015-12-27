@@ -47,20 +47,27 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import matplotlib.animation as animation
 
+
+#Creacion de la Poblacion
 datos = open("Poblacion.txt","w")
 datos.close()
-
-for x in range(1,10000):
+estado = 1
+for x in range(1,2000):
 	longitud = np.random.uniform(-97,-85,1)
 	latitud = np.random.uniform(14.5,21,1)
-
+	#poniendo limites
 	if latitud[0] < 16 and longitud[0] < -93:
-	    pass
-	if latitud[0] < 20 and longitud[0] < -87:
+		pass
+	elif latitud[0] < 21 and latitud[0] > 19 and longitud[0] < -91: 
+		pass
+	elif longitud[0] > -88 and latitud[0] > 16:
 		pass
 	else:
 		datos = open("Poblacion.txt","a")	
 		datos.write(str(latitud[0])+","
-			+str(longitud[0])+"\n")
+			+str(longitud[0])+","+str(estado)
+			+"\n")
 		datos.close()
+
+
 	

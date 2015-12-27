@@ -31,6 +31,25 @@ pullData = open("Poblacion.txt","r").read()
 dataArray = pullData.split('\n')
 lat = []
 lon = []
+est = []
+for eachLine in dataArray:
+    if len(eachLine)>1:
+        x ,y, estado = eachLine.split(',')
+        lat.append(float(x))
+        lon.append(float(y))
+        est.append(int(estado))
+xar, yar = map(lon,lat)
+#colores bo = azul, ro = rojo, go=verde, yo = amarillo  
+"""
+sano - blanco 
+suceptible - Amarillo
+Infectado - Rojo
+Inmune - azul
+"""
+for i in est:
+    if i == 1:
+        point = map.plot(xar,yar, "wo")
+    
 # funcion de animacion
 def animate(i):
     """
@@ -46,14 +65,6 @@ def animate(i):
         if lons[0] > -97:
             return
     """
-    for eachLine in dataArray:
-        if len(eachLine)>1:
-            x ,y = eachLine.split(',')
-            lat.append(float(x))
-            lon.append(float(y))
-        xar, yar = map(lon,lat)
-        point = map.plot(xar,yar, 'ro')
-    
     #obtener una mejor distribucion
     #s = np.random.uniform(1,0,2)
     #print s
@@ -63,6 +74,6 @@ def animate(i):
 
 #fig = plt.subplot()
 # call the animator.  blit=True means only re-draw the parts that have changed.
-anim = animation.FuncAnimation(plt.gcf(), animate, interval=1)
+#anim = animation.FuncAnimation(plt.gcf(), animate, interval=1)
 plt.title("SIMULACION DE LA PROPAGACION DEL DENGUE")
 plt.show()
