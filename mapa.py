@@ -29,51 +29,51 @@ fig.set_size_inches(18.5, 10.5, forward = True)
 #recoleccion de datos 
 pullData = open("Poblacion.txt","r").read()
 dataArray = pullData.split('\n')
+
+datos = open("Estados.txt","r").read()
+estados = datos.split('\n')
+
 lat = []
 lon = []
 est = []
 for eachLine in dataArray:
     if len(eachLine)>1:
-        x ,y, estado = eachLine.split(',')
+        x ,y = eachLine.split(',')
         lat.append(float(x))
         lon.append(float(y))
-        est.append(int(estado))
-xar, yar = map(lon,lat)
-#colores bo = azul, ro = rojo, go=verde, yo = amarillo  
-"""
-sano - blanco 
-suceptible - Amarillo
-Infectado - Rojo
-Inmune - azul
-"""
-for i in est:
-    if i == 1:
-        point = map.plot(xar,yar, "wo")
     
+xar, yar = map(lon,lat)
+#colores bo = azul, ro = rojo, go=verde, yo = amarillo
+border = 0
+for each in estados:
+    border = border + 1
+    if border < len(estados):
+        est.append(int(each))
+
+#dibujando los estados deacuerdo a su valor
+var = 0
+border = 0
+for valor in est:  
+    border = border + 1
+    if border < len(est):        
+        if valor == 0:
+            point = map.plot(xar[var],yar[var], "yo")
+        if valor == 1:
+            point = map.plot(xar[var],yar[var], "go")
+        if valor == 2:
+            point = map.plot(xar[var],yar[var], "bo")
+        if valor == 3:
+            point = map.plot(xar[var],yar[var], "ro")
+        var = var + 1
+
+
 # funcion de animacion
+
 def animate(i):
-    """
-    lons  =  np.random.uniform(-97, -85, 1)
-    lats = np.random.uniform(14.5, 21, 1)
-    if lats[0] < 23 and lons[0] < -106:
-        return
-    if lats[0] < 16 and lons[0] < -93:
-        return
-    if lats[0] > 23 and lons[0] < -110:
-        return
-    if lats[0] < 29 and lats[0] > 21: 
-        if lons[0] > -97:
-            return
-    """
-    #obtener una mejor distribucion
-    #s = np.random.uniform(1,0,2)
-    #print s
     
     return point,
 
 
-#fig = plt.subplot()
-# call the animator.  blit=True means only re-draw the parts that have changed.
 #anim = animation.FuncAnimation(plt.gcf(), animate, interval=1)
 plt.title("SIMULACION DE LA PROPAGACION DEL DENGUE")
 plt.show()
