@@ -29,42 +29,54 @@ fig.set_size_inches(18.5, 10.5, forward = True)
 #recoleccion de datos 
 pullData = open("Poblacion.txt","r").read()
 dataArray = pullData.split('\n')
-
 datos = open("Estados.txt","r").read()
 estados = datos.split('\n')
 
+#generacion de coordenadas
 lat = []
 lon = []
-est = []
 for eachLine in dataArray:
     if len(eachLine)>1:
         x ,y = eachLine.split(',')
         lat.append(float(x))
-        lon.append(float(y))
-    
+        lon.append(float(y))    
 xar, yar = map(lon,lat)
-#colores bo = azul, ro = rojo, go=verde, yo = amarillo
-border = 0
-for each in estados:
-    border = border + 1
-    if border < len(estados):
-        est.append(int(each))
+
+#generacion de graficas de densidades de estadisticas
+"""
+sano = 0
+s = 0
+inm = 0
+r = 0
+for i in estados:
+    if i == ""0"":
+        sano += 1
+    if i == "1":
+        s += 1
+    if i == "2":
+        inm += 1
+    if i == "3":
+        r += 1
+"""
+
 
 #dibujando los estados deacuerdo a su valor
 var = 0
 border = 0
-for valor in est:  
+for valor in estados:  
     border = border + 1
-    if border < len(est):        
-        if valor == 0:
+    if border < len(estados):        
+        if valor == "0":
             point = map.plot(xar[var],yar[var], "yo")
-        if valor == 1:
+        if valor == "1":
             point = map.plot(xar[var],yar[var], "go")
-        if valor == 2:
+        if valor == "2":
             point = map.plot(xar[var],yar[var], "bo")
-        if valor == 3:
+        if valor == "3":
             point = map.plot(xar[var],yar[var], "ro")
         var = var + 1
+
+#creacion de estadisticas de estados
 
 
 # funcion de animacion
