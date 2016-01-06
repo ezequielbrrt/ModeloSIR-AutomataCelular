@@ -15,7 +15,7 @@ datos.close()
 
 #generacion de coordenadas 
 contador = 0
-for x in range(1,20000):
+for x in range(1,2000):
 	longitud = np.random.uniform(-108,-85,1)
 	latitud = np.random.uniform(14.5,25,1)
 	lon = longitud[0]
@@ -54,11 +54,11 @@ for x in range(1,20000):
 
 
 #generacion de estados
-sano = 0.3
-s = 0.2
-inm = 0.3
-r = 0.2
-v = np.random.choice(4, contador, p=[sano, s, inm, r])
+sano = 0.3 #amarillo 0
+s = 0.2		#verde 1
+inf = 0.3	#rojo 2
+r = 0.2		#azul 3
+v = np.random.choice(4, contador, p=[sano, s, inf, r])
 for i in v:
 	data = open("Estados.txt","a")
 	data.write(str(i)+"\n")
